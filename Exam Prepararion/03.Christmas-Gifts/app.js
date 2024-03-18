@@ -101,18 +101,35 @@ function renderGift(gift) {
   const container = document.createElement("div");
   container.className = "gift-sock";
 
-  const h2Element = document.createElement("h2");
+  const content = document.createElement("div");
+  content.className = "content";
+
+
+  const h2Element = document.createElement("p");
   h2Element.textContent = gift.gift;
 
-  const h3ForElement = document.createElement("h3");
+  const h3ForElement = document.createElement("p");
   h3ForElement.textContent = gift.for;
 
-  const h3PriceElement = document.createElement("h3");
+  const h3PriceElement = document.createElement("p");
   h3PriceElement.textContent = gift.price;
+
+  const button = document.createElement("div");
+  button.className = "buttons-container";
 
   const changeButton = document.createElement("button");
   changeButton.className = "change-btn";
   changeButton.textContent = "Change";
+
+  giftList.appendChild(container);
+  container.appendChild(content);
+  content.appendChild(h2Element);
+  content.appendChild(h3ForElement);
+  content.appendChild(h3PriceElement);
+  container.appendChild(button);
+  button.appendChild(changeButton);
+
+  
 
 
   changeButton.addEventListener("click", () => {
@@ -136,7 +153,7 @@ function renderGift(gift) {
 
   const doneButton = document.createElement("button");
   doneButton.className = "delete-btn";
-  doneButton.textContent = "Done";
+  doneButton.textContent = "Delete";
   doneButton.addEventListener("click", () => {
     //send delete request
     fetch(`${baseUrl}/${gift._id}`, {
@@ -146,11 +163,13 @@ function renderGift(gift) {
       .then(loadGifts);
   });
 
-  container.appendChild(h2Element);
-  container.appendChild(h3ForElement);
-  container.appendChild(h3PriceElement);
-  container.appendChild(changeButton);
-  container.appendChild(doneButton);
+  giftList.appendChild(container);
+  container.appendChild(content);
+  content.appendChild(h2Element);
+  content.appendChild(h3ForElement);
+  content.appendChild(h3PriceElement);
+  container.appendChild(button);
+  button.appendChild(doneButton);
 
   return container;
 }
